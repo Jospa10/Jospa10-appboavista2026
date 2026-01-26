@@ -245,7 +245,6 @@ const App: React.FC = () => {
       isAdmin={isAdmin}
       onAdminClick={isAdmin ? handleLogout : () => setIsLoginModalOpen(true)}
     >
-      {/* Modais e Conteúdo permanecem iguais, apenas garantindo que os componentes importados acima existam na raiz */}
       <Modal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} title="Acesso Administrativo">
         <div className="space-y-4">
           <input type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className={`w-full bg-slate-800 border ${loginError ? 'border-red-500' : 'border-slate-700'} rounded-xl p-4 text-center text-2xl tracking-widest outline-none text-white`} placeholder="****" onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()} />
@@ -341,9 +340,49 @@ const App: React.FC = () => {
                </div>
              </div>
           </div>
+          <div className="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950/30">
+              <h3 className="text-xl font-sport tracking-widest uppercase">Histórico Financeiro</h3>
+              {isAdmin && <button onClick={() => setIsTransactionModalOpen(true)} className="bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold px-4 py-2 rounded-xl uppercase">Novo Lançamento</button>}
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead className="bg-slate-950/50 text-slate-500 text-[9px] font-black uppercase tracking-widest">
+                  <tr>
+                    <th className="px-6 py-4">Data</th>
+                    <th className="px-6 py-4">Descrição</th>
+                    <th className="px-6 py-4 text-right">Valor</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/50">
+                  {transactions.map(t => (
+                    <tr key={t.id} className="hover:bg-slate-800/30 transition-colors">
+                      <td className="px-6 py-4 text-xs text-slate-400">{new Date(t.date).toLocaleDateString('pt-BR')}</td>
+                      <td className="px-6 py-4 font-bold text-slate-200 text-sm">{t.description}</td>
+                      <td className={`px-6 py-4 text-right font-sport text-lg ${t.type === 'income' ? 'text-emerald-500' : 'text-red-500'}`}>
+                        {t.type === 'income' ? '+' : '-'} R$ {Math.abs(t.amount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       )}
-      {/* ... outros conteúdos permanecem iguais ... */}
+      {activeTab === 'gallery' && <div className="grid grid-cols-2 md:grid-cols-4 gap-4">{gallery.map(img => <div key={img.id} onClick={() => setViewingPhotoUrl(img.url)} className="aspect-square bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 cursor-pointer"><img src={img.url} className="w-full h-full object-cover" /></div>)}</div>}
+      {activeTab === 'tactic' && <div className="grid md:grid-cols-2 gap-8"><TacticalField players={players} formation={formation} isAdmin={isAdmin} customPositions={customTacticalPositions[formation]} onPositionsChange={handleTacticalPositionChange} /></div>}
+      {activeTab === 'stats' && <div className="grid md:grid-cols-2 gap-8"><div className="bg-slate-900 p-6 rounded-2xl border border-slate-800"><h3 className="text-lg font-sport mb-6 uppercase">Top Goleadores</h3><div className="h-80"><ResponsiveContainer width="100%" height="100%"><BarChart layout="vertical" data={statsData}><XAxis type="number" hide /><YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={10} width={80} /><Bar dataKey="gols" fill="#10b981" radius={[0, 4, 4, 0]} /><Tooltip /></BarChart></ResponsiveContainer></div></div></div>}
+      {activeTab === 'settings' && (
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col items-center gap-6">
+            <div className="w-32 h-32 bg-slate-800 rounded-2xl border-2 border-emerald-500 flex items-center justify-center overflow-hidden">{teamLogo ? <img src={teamLogo} className="w-full h-full object-cover" /> : <span className="text-3xl">⚽</span>}</div>
+            <input type="text" value={teamName} onChange={(e) => setTeamName(e.target.value)} disabled={!isAdmin} className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-center text-white font-sport uppercase outline-none" />
+            <div className="bg-white p-3 rounded-xl"><img src={qrCodeUrl} className="w-32 h-32" /></div>
+            <button onClick={handleShareApp} className="w-full bg-emerald-600 py-3 rounded-xl font-bold uppercase text-xs tracking-widest">📤 Compartilhar App</button>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
