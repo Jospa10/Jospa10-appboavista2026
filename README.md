@@ -1,11 +1,17 @@
-<div align="center">
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+# Boa Vista FC - Arena Manager 2026
 
-  <h1>Built with AI Studio</h2>
+## 🚀 Como preencher a tela da Vercel (Seu Print)
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+1. **Nome do Projeto**: Mantenha `appboavista2026`.
+2. **Framework Preset**: Deixe como **Vite**.
+3. **Root Directory**: Mantenha `./`.
+4. **Environment Variables** (Role para baixo):
+   - Clique em "Environment Variables".
+   - **Key**: `API_KEY`
+   - **Value**: (Cole sua chave do Gemini aqui)
+   - Clique em **Add**.
+5. **Finalizar**: Clique no botão azul **"Deploy"**.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+---
+**Dica**: Se você já fez o upload para o GitHub, esses novos arquivos que acabei de criar vão atualizar lá automaticamente se você salvá-los. Se não atualizar, envie-os para o seu GitHub antes de clicar em Deploy na Vercel.

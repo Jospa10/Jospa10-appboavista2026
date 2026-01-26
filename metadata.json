@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Arena Manager - Gestão de Futebol Amador",
+  "description": "Uma plataforma completa para gerenciar times de futebol amador, incluindo escalação, estatísticas, financeiro e análise tática por IA.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
