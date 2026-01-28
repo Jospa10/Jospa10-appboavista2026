@@ -13,3 +13,27 @@
     }
   ]
 }
+{
+  "reescritas": [
+    {
+      "fonte": "/(.*)",
+      "destino": "/index.html"
+    }
+  ],
+  "cabeçalhos": [
+    {
+      "fonte": "/sw.js",
+      "cabeçalhos": [
+        {
+          "chave": "Controle de cache",
+          "valor": "público, idade-máxima=0, deve-revalidar"
+        },
+        {
+          "chave": "Trabalhador de serviços permitido",
+          "valor": "/"
+        }
+      ]
+    }
+  ],
+  "installCommand": "npm install --legacy-peer-deps" 
+}
