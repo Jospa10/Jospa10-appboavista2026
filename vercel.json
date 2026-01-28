@@ -1,39 +1,24 @@
-
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
-        { "key": "Service-Worker-Allowed", "value": "/" }
-      ]
-    }
-  ]
-}
-{
-  "reescritas": [
-    {
-      "fonte": "/(.*)",
-      "destino": "/index.html"
-    }
-  ],
-  "cabeçalhos": [
-    {
-      "fonte": "/sw.js",
-      "cabeçalhos": [
         {
-          "chave": "Controle de cache",
-          "valor": "público, idade-máxima=0, deve-revalidar"
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
         },
         {
-          "chave": "Trabalhador de serviços permitido",
-          "valor": "/"
+          "key": "Service-Worker-Allowed",
+          "value": "/"
         }
       ]
     }
   ],
-  "installCommand": "npm install --legacy-peer-deps" 
+  "installCommand": "npm install --legacy-peer-deps"
 }
